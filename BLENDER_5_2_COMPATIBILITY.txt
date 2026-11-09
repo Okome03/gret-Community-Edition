@@ -1,0 +1,19 @@
+gret - Blender 5.2 compatibility build
+
+Based on the user-provided gret-master source archive.
+
+Changes in this build:
+- Add-on metadata now declares Blender 5.2.0 as its minimum version.
+- Removed unreachable BGL drawing branches (BGL was removed in Blender 5.0).
+- Updated vertex bevel-weight lookup to the `bevel_weight_vert` mesh attribute.
+- Fixed vertex-color preview active-index access to use `mesh.color_attributes`.
+
+Validation performed in this environment:
+- All Python files passed Python syntax compilation.
+- Static scan confirms no executable BGL imports/calls or removed MeshVertex.bevel_weight access remain.
+
+Limitations:
+- Blender 5.2 itself is not installed in the build environment, so interactive Blender registration,
+  drawing, export, bake, and modeling operations could not be run end-to-end.
+- Legacy `Mesh.vertex_colors` access remains in several code paths because Blender 5.2 still
+  exposes it as a deprecated compatibility API.
